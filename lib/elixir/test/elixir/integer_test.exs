@@ -13,6 +13,12 @@ defmodule IntegerTest do
   def test_is_even_in_guards(number) when Integer.is_even(number), do: number
   def test_is_even_in_guards(_number), do: false
 
+  def test_is_positive_in_guards(number) when Integer.is_positive(number), do: number
+  def test_is_positive_in_guards(_number), do: false
+
+  def test_is_negative_in_guards(number) when Integer.is_negative(number), do: number
+  def test_is_negative_in_guards(_number), do: false
+
   test "is_odd/1" do
     assert Integer.is_odd(0) == false
     assert Integer.is_odd(1) == true
@@ -35,6 +41,24 @@ defmodule IntegerTest do
     assert Integer.is_even(-3) == false
     assert test_is_even_in_guards(10) == 10
     assert test_is_even_in_guards(11) == false
+  end
+
+  test "is_positive/1" do
+    assert Integer.is_positive(0) == false
+    assert Integer.is_positive(0.5) == false
+    assert Integer.is_positive(-10) == false
+    assert Integer.is_positive(100) == true
+    assert test_is_positive_in_guards(100) == 100
+    assert test_is_positive_in_guards(-10) == false
+  end
+
+  test "is_negative/1" do
+    assert Integer.is_negative(0) == false
+    assert Integer.is_negative(-0.5) == false
+    assert Integer.is_negative(10) == false
+    assert Integer.is_negative(-100) == true
+    assert test_is_negative_in_guards(-10) == -10
+    assert test_is_negative_in_guards(100) == false
   end
 
   test "mod/2" do

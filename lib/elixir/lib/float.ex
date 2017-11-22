@@ -12,6 +12,50 @@ defmodule Float do
   @type precision_range :: 0..15
 
   @doc """
+  Determines if a `float` is positive.
+
+  Returns `true` is the given value is a positive `float`,
+  otherwise it returns false.
+
+  Allowed in guard clauses.
+
+  ## Examples
+
+      iex> Float.is_positive(10.5)
+      true
+
+      iex> Float.is_positive(-1.3)
+      false
+
+      iex> Float.is_positive(0)
+      false
+
+  """
+  defguard is_positive(float) when is_float(float) and float > 0
+
+  @doc """
+  Determines if a `float` is negative.
+
+  Returns `true` is the given value is a negative `float`,
+  otherwise it returns false.
+
+  Allowed in guard clauses.
+
+  ## Examples
+
+      iex> Float.is_negative(-10.5)
+      true
+
+      iex> Float.is_negative(1.3)
+      false
+
+      iex> Float.is_negative(0)
+      false
+
+  """
+  defguard is_negative(float) when is_float(float) and float < 0
+
+  @doc """
   Parses a binary into a float.
 
   If successful, returns a tuple in the form of `{float, remainder_of_binary}`;

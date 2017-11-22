@@ -60,6 +60,50 @@ defmodule Integer do
   end
 
   @doc """
+  Determines if an `integer` is positive.
+
+  Returns `true` is the given value is a positive `integer`,
+  otherwise it returns false.
+
+  Allowed in guard clauses.
+
+  ## Examples
+
+      iex> Integer.is_positive(10)
+      true
+
+      iex> Integer.is_positive(-1)
+      false
+
+      iex> Integer.is_positive(0)
+      false
+
+  """
+  defguard is_positive(integer) when is_integer(integer) and integer > 0
+
+  @doc """
+  Determines if an `integer` is negative.
+
+  Returns `true` is the given value is a negative `integer`,
+  otherwise it returns false.
+
+  Allowed in guard clauses.
+
+  ## Examples
+
+      iex> Integer.is_negative(-10)
+      true
+
+      iex> Integer.is_negative(1)
+      false
+
+      iex> Integer.is_negative(0)
+      false
+
+  """
+  defguard is_negative(integer) when is_integer(integer) and integer < 0
+
+  @doc """
   Computes the modulo remainder of an integer division.
 
   `Integer.mod/2` uses floored division, which means that

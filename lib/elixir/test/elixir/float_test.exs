@@ -5,6 +5,32 @@ defmodule FloatTest do
 
   doctest Float
 
+  require Float
+
+  def test_is_positive_in_guards(number) when Float.is_positive(number), do: number
+  def test_is_positive_in_guards(_number), do: false
+
+  def test_is_negative_in_guards(number) when Float.is_negative(number), do: number
+  def test_is_negative_in_guards(_number), do: false
+
+  test "is_positive/1" do
+    assert Float.is_positive(0.00) == false
+    assert Float.is_positive(1000) == false
+    assert Float.is_positive(-1.0) == false
+    assert Float.is_positive(10.0) == true
+    assert test_is_positive_in_guards(10.0) == 10.0
+    assert test_is_positive_in_guards(-1.0) == false
+  end
+
+  test "is_negative/1" do
+    assert Float.is_negative(0.00) == false
+    assert Float.is_negative(-100) == false
+    assert Float.is_negative(10.0) == false
+    assert Float.is_negative(-1.0) == true
+    assert test_is_negative_in_guards(-1.0) == -1.0
+    assert test_is_negative_in_guards(10.0) == false
+  end
+
   test "parse/1" do
     assert Float.parse("12") === {12.0, ""}
     assert Float.parse("-12") === {-12.0, ""}
